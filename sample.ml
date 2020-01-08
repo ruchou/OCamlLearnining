@@ -1,78 +1,65 @@
 
-let rec factorial n =
-    if n == 0 then 1
+
+let is_even x =
+    if x mod 2 = 0
+        then true
     else
-        n * factorial (n-1) ;;
-
-let res = factorial 10 ;;
-
-print_int res ;;
-
-let print_hello () = print_endline "Hello World" ;;
-print_hello () ;;
-
-
-let add x y = x + y ;;
-let inc_2 = add 2;;
-print_int (inc_2 3)
-
-let rec
-    is_even = function
-    | 0 -> true
-    | n -> is_odd (n-1)
-    and
-    is_odd = function
-    | 0 -> false
-    | n -> is_even(n-1)
+        false
     ;;
 
-let my_lambda = fun x -> x + 1 ;;
+let (x,y) = (1,"fjdskl");;
 
-let my_list = [1;2;3] ;;
+type point2d = {
+    x : float;
+    y : float;
+};;
+let p  = {
+    x = 3.;
+    y = 4.;
+};;
 
-let my_bad_list = [1,2,3,4] ;;
+let numbers = [| 1;2;3;4|];;
+numbers.(1) <- 10;;
 
-let my_arrary = [|2;3;4;5|];;
-my_arrary.(0) = 90 ;;
-
-let ocaml = (String.make 1 'o') ^ "Caml" ;;
-
-type ml = OCaml | StandaardMl;;
-let lang = OCaml
-
-type 'a list_of_lists = 'a list list ;;
-
-
-let is_zero x =
-    match x with
-    | 0 -> true
-    | _ -> false
-    ;;
-
-let non_zero = function
-    | 0 -> false
-    | _ -> true
-    ;;
-
-let abs x = match x with
-    | x when x < 0 -> -x
-    | _ -> x
+let my_sum list =
+    let total = ref 0 in
+    List.iter (fun x -> total := !total +x ) list ;
+    !total
     ;;
 
 
-type animal = Dog of string | Cat of string ;;
-
-let say x = match x with
-    | Dog x -> x ^ "woof"
-    | Cat x -> x ^ "meow"
+let permute array =
+    let len = Array.length array in
+    for i = 0 to len -2 do
+        let j = i + 1 + Random.int (len - i - 1) in
+        let tmp = array.(i) in
+        array.(i) <- array.(j) ;
+        array.(j) <- tmp
+    done
     ;;
-let celine = Cat "Celine" ;;
-say celine ;;
+
+let my_array = [|1;2;3;3;4;6;7;2|];;
+
+open Core.Std
+
+let rec read_and_acc accum =
+    let line = In_channel.input_line In_channel.stdin in
+    match line with
+    | None -> accum
+    | Some x -> read_and_acc (accum +. Float.of_string x);;
+
+let () =
+    printf "Total: %F\n" (read_and_accumulate 0.)
 
 
-let rec sum_list l =
-    match l with
-    | [] -> 0
-    | x::xs -> x + (sum_list xs)
-    ;;
+
+
+
+
+
+
+
+
+
+
 
